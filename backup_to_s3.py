@@ -88,7 +88,10 @@ def backup_to_s3(access_key, secret_access_key, bucket, directories = None,
     # Now upload that .tar.gz file to S3
     conn = boto.connect_s3(access_key, secret_access_key)
     # This creates the bucket only if it does not already exist:
-    b = conn.create_bucket(bucket)
+    try:
+        b = conn.get_bucket(bucket)
+    except boto.exception.S3ResponseError:
+        b = conn.create_bucket(bucket)
     k = Key(b)
     k.key = datetime.datetime.utcnow().strftime('%Y-%m-%d-%H-%M-%S.tar.gz')
     k.set_contents_from_filename(targz)
