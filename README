@@ -2,16 +2,25 @@ Configured S3 backups
 ---------------------
 
 This uses the backup_to_s3.py script by @simonw to help configure your 
-local backups, so that they can be run by e.g. cron.
+local backups, so that they can be run by e.g. cron. Thanks to @simonw, 
+the backup script is now included with this repository (see the credits 
+below for more details.)
 
-Check out the repository and drop backup_to_s3.py into it:
 
-	http://simonwillison.net/2008/Sep/21/backup/
+= Setup =
 
-You need example_conf/INIT.conf in ~/.backup_to_s3/INIT.conf to begin.
+1. Install the python-boto libraries on your machine.
 
-Then you can copy example_conf/site.conf to any number of configuration 
+2. Check out this repository anywhere on your filesystem.
+
+3. Copy example_conf/INIT.conf in ~/.backup_to_s3/INIT.conf and edit the
+public and private access keys.
+
+4. Then copy example_conf/site.conf to any number of configuration 
 files in ~/.backup_to_s3 e.g. ~/.backup_to_s3/mywebsite.conf .
+
+
+= Execution =
 
 You can perform a dry run (no upload to S3) by running:
 
@@ -24,3 +33,9 @@ If you're happy with the results, run:
  * ./backup.py ALL go
 
 to actually commit the backup(s) to S3.
+
+
+= Credits =
+
+Original backup_to_s3.py at http://simonwillison.net/2008/Sep/21/backup/
+
